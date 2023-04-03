@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, TouchableHighlight, View} from 'react-native';
 import {Task} from '../../types';
 import styles from './styles';
 
@@ -10,31 +10,36 @@ interface Props {
 
 function Card({task, handlePress}: Props) {
   return (
-    <View style={styles.cardContainer} onTouchEnd={() => handlePress(task.id)}>
-      <Text
-        style={{
-          ...styles.cardTitle,
-          ...(task.status && styles.crossedText),
-        }}
-        numberOfLines={1}>
-        {task.title}
-      </Text>
-      <Text
-        style={{
-          ...styles.cardDescription,
-          ...(task.status && styles.crossedText),
-        }}
-        numberOfLines={2}>
-        {task.description}
-      </Text>
-      <Text
-        style={{
-          ...styles.cardStatus,
-          ...(task.status ? styles.cardStatusDone : styles.cardStatusPending),
-        }}>
-        {task.status ? 'Done' : 'Pending'}
-      </Text>
-    </View>
+    <TouchableHighlight
+      activeOpacity={0.6}
+      underlayColor="#c2c2c2"
+      onPress={() => handlePress(task.id)}>
+      <View style={styles.cardContainer}>
+        <Text
+          style={{
+            ...styles.cardTitle,
+            ...(task.status && styles.crossedText),
+          }}
+          numberOfLines={1}>
+          {task.title}
+        </Text>
+        <Text
+          style={{
+            ...styles.cardDescription,
+            ...(task.status && styles.crossedText),
+          }}
+          numberOfLines={2}>
+          {task.description}
+        </Text>
+        <Text
+          style={{
+            ...styles.cardStatus,
+            ...(task.status ? styles.cardStatusDone : styles.cardStatusPending),
+          }}>
+          {task.status ? 'Realizado' : 'No realizado'}
+        </Text>
+      </View>
+    </TouchableHighlight>
   );
 }
 
