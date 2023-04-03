@@ -31,6 +31,9 @@ const styles = StyleSheet.create({
   cardStatusPending: {
     color: '#9a031e',
   },
+  crossedText: {
+    textDecorationLine: 'line-through',
+  },
 });
 
 export default styles;
