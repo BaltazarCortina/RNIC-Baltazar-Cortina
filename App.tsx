@@ -213,6 +213,7 @@ const styles = StyleSheet.create({
   emptyListMessageText: {
     fontSize: 16,
     textAlign: 'center',
+    color: isIOS ? '#EEEEEE' : '#212121',
   },
   form: {
     padding: 10,
