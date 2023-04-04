@@ -1,19 +1,27 @@
 import React from 'react';
-import {Text, TouchableHighlight, View} from 'react-native';
+import {Alert, Text, TouchableHighlight, View} from 'react-native';
 import {Task} from '../../types';
 import styles from './styles';
 
 interface Props {
   task: Task;
   handlePress: (id: number) => void;
+  handleDelete: (id: number) => void;
 }
 
-function Card({task, handlePress}: Props) {
+function Card({task, handlePress, handleDelete}: Props) {
+  const handleDeleteCard = () => {
+    Alert.alert('Delete task?', 'Are you sure you want to delete this task?', [
+      {text: 'Cancel', style: 'cancel'},
+      {text: 'Yes', onPress: () => handleDelete(task.id)},
+    ]);
+  };
   return (
     <TouchableHighlight
       activeOpacity={0.6}
       underlayColor="#c2c2c2"
-      onPress={() => handlePress(task.id)}>
+      onPress={() => handlePress(task.id)}
+      onLongPress={() => handleDeleteCard()}>
       <View style={styles.cardContainer}>
         <Text
           style={{
@@ -36,7 +44,7 @@ function Card({task, handlePress}: Props) {
             ...styles.cardStatus,
             ...(task.status ? styles.cardStatusDone : styles.cardStatusPending),
           }}>
-          {task.status ? 'Realizado' : 'No realizado'}
+          {task.status ? 'Done' : 'Pending'}
         </Text>
       </View>
     </TouchableHighlight>
