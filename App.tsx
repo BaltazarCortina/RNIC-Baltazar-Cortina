@@ -127,7 +127,7 @@ function App(): JSX.Element {
       />
       <SafeAreaView style={styles.backgroundStyle}>
         <KeyboardAvoidingView
-          behavior={isIOS ? 'padding' : 'height'}
+          behavior={isIOS ? 'padding' : undefined}
           style={styles.mainContainer}>
           <FlatList
             data={tasksList}
