@@ -13,6 +13,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
+  StatusBar,
   StyleSheet,
   Text,
   TextInput,
@@ -21,6 +22,8 @@ import {
 } from 'react-native';
 
 import Card from './src/components/card';
+
+const isIOS = Platform.OS === 'ios';
 
 const mockTasks = [
   {
@@ -116,62 +119,73 @@ function App(): JSX.Element {
   };
 
   return (
-    <SafeAreaView style={styles.backgroundStyle}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.mainContainer}>
-        <FlatList
-          data={tasksList}
-          renderItem={({item}) => (
-            <Card
-              task={item}
-              handlePress={handlePressCard}
-              handleDelete={handleDeleteCard}
-            />
-          )}
-          style={styles.list}
-          ListEmptyComponent={EmptyListMessage}
-          ListHeaderComponent={ListHeader}
-        />
-        <View style={styles.form} onTouchEnd={() => Keyboard.dismiss()}>
-          <Text style={styles.formTitle}>Add new task</Text>
-          <View style={styles.formField}>
-            <TextInput
-              placeholder="Title"
-              style={styles.formInput}
-              value={title}
-              onChangeText={setTitle}
-              onTouchEnd={e => e.stopPropagation()}
-              onSubmitEditing={() => descriptionInput.current?.focus()}
-            />
+    <>
+      <StatusBar
+        animated={true}
+        backgroundColor="#EEEEEE"
+        barStyle={isIOS ? 'light-content' : 'dark-content'}
+      />
+      <SafeAreaView style={styles.backgroundStyle}>
+        <KeyboardAvoidingView
+          behavior={isIOS ? 'padding' : 'height'}
+          style={styles.mainContainer}>
+          <FlatList
+            data={tasksList}
+            renderItem={({item}) => (
+              <Card
+                task={item}
+                handlePress={handlePressCard}
+                handleDelete={handleDeleteCard}
+              />
+            )}
+            style={styles.list}
+            ListEmptyComponent={EmptyListMessage}
+            ListHeaderComponent={ListHeader}
+          />
+          <View style={styles.form} onTouchEnd={() => Keyboard.dismiss()}>
+            <Text style={styles.formTitle}>Add new task</Text>
+            <View style={styles.formField}>
+              <TextInput
+                placeholder="Title"
+                placeholderTextColor={isIOS ? '#F5F5F5' : '#333333'}
+                style={styles.formInput}
+                value={title}
+                onChangeText={setTitle}
+                onTouchEnd={e => e.stopPropagation()}
+                onSubmitEditing={() => descriptionInput.current?.focus()}
+              />
+            </View>
+            <View style={styles.formField}>
+              <TextInput
+                ref={descriptionInput}
+                placeholder="Description"
+                placeholderTextColor={isIOS ? '#F5F5F5' : '#333333'}
+                style={styles.formInput}
+                value={description}
+                onChangeText={setDescription}
+                onTouchEnd={e => e.stopPropagation()}
+                onSubmitEditing={handleAddTask}
+              />
+            </View>
+            <View style={styles.formButtonContainer}>
+              <TouchableHighlight
+                activeOpacity={0.6}
+                underlayColor="#c2c2c2"
+                onPress={handleAddTask}
+                style={styles.formButton}>
+                <Text style={styles.formButtonText}>ADD!</Text>
+              </TouchableHighlight>
+            </View>
           </View>
-          <View style={styles.formField}>
-            <TextInput
-              ref={descriptionInput}
-              placeholder="Description"
-              style={styles.formInput}
-              value={description}
-              onChangeText={setDescription}
-              onTouchEnd={e => e.stopPropagation()}
-              onSubmitEditing={handleAddTask}
-            />
-          </View>
-          <TouchableHighlight
-            activeOpacity={0.6}
-            underlayColor="#c2c2c2"
-            onPress={handleAddTask}>
-            <Text style={styles.formButton}>ADD!</Text>
-          </TouchableHighlight>
-        </View>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   backgroundStyle: {
-    backgroundColor: '#BFCDE0',
-    // backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: isIOS ? '#212121' : '#EEEEEE',
   },
   mainContainer: {
     height: '100%',
@@ -180,12 +194,16 @@ const styles = StyleSheet.create({
   list: {},
   listHeaderContainer: {
     paddingHorizontal: 10,
-    paddingVertical: 10,
+    paddingVertical: 5,
+    marginVertical: 5,
+    borderBottomColor: '#FFC107',
+    borderBottomWidth: 2,
   },
   listHeaderText: {
     fontSize: 20,
     fontWeight: '600',
     textAlign: 'center',
+    color: isIOS ? '#EEEEEE' : '#212121',
   },
   emptyListMessageContainer: {
     flexGrow: 1,
@@ -197,32 +215,45 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   form: {
-    padding: 12,
-    paddingTop: 20,
-    borderTopColor: '#c2c2c2',
-    borderTopWidth: 1,
-    backgroundColor: '#fff',
+    padding: 10,
+    marginTop: 5,
+    borderTopColor: '#FFC107',
+    borderTopWidth: 2,
+    backgroundColor: isIOS ? '#333333' : '#F5F5F5',
   },
   formTitle: {
     fontSize: 16,
     fontWeight: '600',
     textAlign: 'center',
+    paddingBottom: 10,
+    color: isIOS ? '#EEEEEE' : '#212121',
   },
   formField: {
-    paddingVertical: 10,
+    paddingBottom: 10,
   },
   formInput: {
     height: 40,
     paddingVertical: 5,
     paddingHorizontal: 15,
     borderWidth: 1,
-    borderColor: '#c2c2c2',
+    borderColor: isIOS ? '#F5F5F5' : '#333333',
     borderRadius: 15,
+    color: isIOS ? '#F5F5F5' : '#333333',
+  },
+  formButtonContainer: {
+    alignItems: 'center',
   },
   formButton: {
+    width: 80,
+    padding: 8,
+    borderRadius: 10,
+    backgroundColor: '#FFC107',
+  },
+  formButtonText: {
     fontSize: 16,
     fontWeight: '600',
     textAlign: 'center',
+    color: '#333333',
   },
 });
 

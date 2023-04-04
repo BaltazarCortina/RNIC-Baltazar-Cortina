@@ -1,31 +1,31 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
+
+const isIOS = Platform.OS === 'ios';
 
 const styles = StyleSheet.create({
   cardContainer: {
     margin: 5,
-    marginBottom: 0,
+    marginTop: 0,
+  },
+  card: {
     paddingBottom: 10,
-    borderColor: '#c2c2c2',
-    borderWidth: 1,
     borderRadius: 15,
     padding: 10,
-    backgroundColor: '#fff',
-
-    elevation: 5,
-
-    shadowColor: '#c2c2c2',
+    backgroundColor: isIOS ? '#333333' : '#FFF',
+    elevation: 3,
+    shadowColor: '#333333',
     shadowOffset: {width: 2, height: 2},
     shadowOpacity: 0.8,
     shadowRadius: 1,
   },
   cardTitle: {
-    color: '#000000',
+    color: isIOS ? '#F5F5F5' : '#333333',
     fontSize: 18,
     paddingBottom: 5,
     fontWeight: '600',
   },
   cardDescription: {
-    color: '#202020',
+    color: isIOS ? '#F5F5F5' : '#333333',
     fontSize: 16,
     fontWeight: '300',
   },
