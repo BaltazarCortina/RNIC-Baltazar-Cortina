@@ -5,25 +5,19 @@
  * @format
  */
 
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   AppState,
-  FlatList,
-  Keyboard,
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
   StatusBar,
   StyleSheet,
-  Text,
-  TextInput,
-  TouchableHighlight,
-  View,
 } from 'react-native';
 import RNBootSplash from 'react-native-bootsplash';
+import Form from './src/components/form';
 
-import Card from './src/components/card';
-import CheckSvg from './src/assets/icons/check';
+import List from './src/components/list';
 
 const isIOS = Platform.OS === 'ios';
 
@@ -55,26 +49,8 @@ const mockTasks = [
   },
 ];
 
-const EmptyListMessage = () => (
-  <View style={styles.emptyListMessageContainer}>
-    <Text style={styles.emptyListMessageText}>
-      There are no tasks yet, add one!
-    </Text>
-  </View>
-);
-
-const ListHeader = () => (
-  <View style={styles.listHeaderContainer}>
-    <Text style={styles.listHeaderText}>Tasks List</Text>
-  </View>
-);
-
 function App(): JSX.Element {
   const [tasksList, setTasksList] = useState(mockTasks);
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-
-  const descriptionInput = useRef<TextInput>(null);
 
   useEffect(() => {
     RNBootSplash.hide({fade: true});
@@ -107,7 +83,7 @@ function App(): JSX.Element {
     setTasksList(newList);
   };
 
-  const handleAddTask = () => {
+  const handleAddTask = (title: string, description: string) => {
     if (title && description) {
       const newTask = {
         id: tasksList.length,
@@ -116,8 +92,6 @@ function App(): JSX.Element {
         status: false,
       };
       setTasksList([...tasksList, newTask]);
-      setTitle('');
-      setDescription('');
     }
   };
 
@@ -132,57 +106,12 @@ function App(): JSX.Element {
         <KeyboardAvoidingView
           behavior={isIOS ? 'padding' : undefined}
           style={styles.mainContainer}>
-          <FlatList
-            data={tasksList}
-            renderItem={({item}) => (
-              <Card
-                task={item}
-                handlePress={handlePressCard}
-                handleDelete={handleDeleteCard}
-              />
-            )}
-            style={styles.list}
-            ListEmptyComponent={EmptyListMessage}
-            ListHeaderComponent={ListHeader}
+          <List
+            tasksList={tasksList}
+            handlePressCard={handlePressCard}
+            handleDeleteCard={handleDeleteCard}
           />
-          <View style={styles.form} onTouchEnd={() => Keyboard.dismiss()}>
-            <Text style={styles.formTitle}>Add new task</Text>
-            <View style={styles.formField}>
-              <TextInput
-                placeholder="Title"
-                placeholderTextColor={isIOS ? '#F5F5F5' : '#333333'}
-                style={styles.formInput}
-                value={title}
-                onChangeText={setTitle}
-                onTouchEnd={e => e.stopPropagation()}
-                onSubmitEditing={() => descriptionInput.current?.focus()}
-              />
-            </View>
-            <View style={styles.formField}>
-              <TextInput
-                ref={descriptionInput}
-                placeholder="Description"
-                placeholderTextColor={isIOS ? '#F5F5F5' : '#333333'}
-                style={styles.formInput}
-                value={description}
-                onChangeText={setDescription}
-                onTouchEnd={e => e.stopPropagation()}
-                onSubmitEditing={handleAddTask}
-              />
-            </View>
-            <View style={styles.formButtonContainer}>
-              <TouchableHighlight
-                activeOpacity={0.6}
-                underlayColor="#c2c2c2"
-                onPress={handleAddTask}
-                style={styles.formButtonTouchable}>
-                <View style={styles.formButton}>
-                  <CheckSvg color={'#212121'} />
-                  <Text style={styles.formButtonText}>ADD</Text>
-                </View>
-              </TouchableHighlight>
-            </View>
-          </View>
+          <Form handleAddTask={handleAddTask} />
         </KeyboardAvoidingView>
       </SafeAreaView>
     </>
@@ -196,78 +125,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     height: '100%',
     justifyContent: 'space-between',
-  },
-  list: {},
-  listHeaderContainer: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    marginVertical: 5,
-    borderBottomColor: '#FFC107',
-    borderBottomWidth: 2,
-  },
-  listHeaderText: {
-    fontSize: 20,
-    fontWeight: '600',
-    textAlign: 'center',
-    color: isIOS ? '#EEEEEE' : '#212121',
-  },
-  emptyListMessageContainer: {
-    flexGrow: 1,
-    paddingHorizontal: 10,
-    paddingVertical: 30,
-  },
-  emptyListMessageText: {
-    fontSize: 16,
-    textAlign: 'center',
-    color: isIOS ? '#EEEEEE' : '#212121',
-  },
-  form: {
-    padding: 10,
-    marginTop: 5,
-    borderTopColor: '#FFC107',
-    borderTopWidth: 2,
-    backgroundColor: isIOS ? '#333333' : '#F5F5F5',
-  },
-  formTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    textAlign: 'center',
-    paddingBottom: 10,
-    color: isIOS ? '#EEEEEE' : '#212121',
-  },
-  formField: {
-    paddingBottom: 10,
-  },
-  formInput: {
-    height: 40,
-    paddingVertical: 5,
-    paddingHorizontal: 15,
-    borderWidth: 1,
-    borderColor: isIOS ? '#F5F5F5' : '#333333',
-    borderRadius: 15,
-    color: isIOS ? '#F5F5F5' : '#333333',
-  },
-  formButtonContainer: {
-    alignItems: 'center',
-  },
-  formButtonTouchable: {
-    borderRadius: 10,
-  },
-  formButton: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 5,
-    width: 100,
-    padding: 8,
-    borderRadius: 10,
-    backgroundColor: '#FFC107',
-  },
-  formButtonText: {
-    fontSize: 16,
-    fontWeight: '600',
-    textAlign: 'center',
-    color: '#333333',
   },
 });
 
