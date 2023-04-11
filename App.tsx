@@ -23,6 +23,7 @@ import {
 import RNBootSplash from 'react-native-bootsplash';
 
 import Card from './src/components/card';
+import CheckSvg from './src/assets/icons/check';
 
 const isIOS = Platform.OS === 'ios';
 
@@ -174,8 +175,11 @@ function App(): JSX.Element {
                 activeOpacity={0.6}
                 underlayColor="#c2c2c2"
                 onPress={handleAddTask}
-                style={styles.formButton}>
-                <Text style={styles.formButtonText}>ADD!</Text>
+                style={styles.formButtonTouchable}>
+                <View style={styles.formButton}>
+                  <CheckSvg color={'#212121'} />
+                  <Text style={styles.formButtonText}>ADD</Text>
+                </View>
               </TouchableHighlight>
             </View>
           </View>
@@ -246,8 +250,15 @@ const styles = StyleSheet.create({
   formButtonContainer: {
     alignItems: 'center',
   },
+  formButtonTouchable: {
+    borderRadius: 10,
+  },
   formButton: {
-    width: 80,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 5,
+    width: 100,
     padding: 8,
     borderRadius: 10,
     backgroundColor: '#FFC107',
