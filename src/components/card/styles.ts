@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     fontWeight: '300',
   },
   cardStatus: {
+    fontFamily: 'Lato-BoldItalic',
     paddingTop: 5,
     fontSize: 14,
     textAlign: 'right',
