@@ -20,24 +20,23 @@ export const CardComponent = styled.TouchableHighlight`
 `;
 
 export const CardTitle = styled.Text<{status: boolean}>`
+  font-family: Lato-Bold;
   font-size: 18px;
-  font-weight: 600;
   padding-bottom: 5px;
   color: ${({theme}) => (isIOS ? theme.colors.white : theme.colors.lightGray)};
   text-decoration-line: ${({status}) => (status ? 'line-through' : 'none')};
 `;
 
 export const CardDescription = styled.Text<{status: boolean}>`
+  font-family: Lato-Light;
   font-size: 16px;
-  font-weight: 300;
   color: ${({theme}) => (isIOS ? theme.colors.white : theme.colors.lightGray)};
   text-decoration-line: ${({status}) => (status ? 'line-through' : 'none')};
 `;
 
 export const CardStatus = styled.Text<{status: boolean}>`
   font-size: 14px;
-  font-family: 'Lato-BoldItalic';
-  font-weight: 500;
+  font-family: Lato-BoldItalic;
   text-align: right;
   padding-top: 5px;
   color: ${({status, theme}) =>

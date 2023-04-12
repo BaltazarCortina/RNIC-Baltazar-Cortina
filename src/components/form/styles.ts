@@ -13,8 +13,8 @@ export const AddForm = styled.View`
 `;
 
 export const FormTitle = styled.Text`
+  font-family: Lato-BoldItalic;
   font-size: 16px;
-  font-weight: 600;
   text-align: center;
   padding-bottom: 10px;
   color: ${({theme}) => (isIOS ? theme.colors.light : theme.colors.darkGray)};
@@ -25,6 +25,7 @@ export const FormField = styled.View`
 `;
 
 export const FormInput = styled.TextInput`
+  font-family: Lato-Italic;
   height: 40px;
   padding: 5px 15px;
   border-color: ${({theme}) =>
@@ -54,8 +55,8 @@ export const FormButton = styled.View`
 `;
 
 export const FormButtonText = styled.Text`
+  font-family: Lato-Bold;
   font-size: 16px;
-  font-weight: 600;
   text-align: center;
   color: ${({theme}) => theme.colors.lightGray};
 `;

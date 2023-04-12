@@ -9,6 +9,7 @@ export const EmptyListMessageContainer = styled.View`
 `;
 
 export const EmptyListMessageText = styled.Text`
+  font-family: Lato-Italic;
   font-size: 16px;
   text-align: center;
   color: ${({theme}) => (isIOS ? theme.colors.light : theme.colors.darkGray)};
@@ -22,8 +23,8 @@ export const ListHeaderMessageContainer = styled.View`
 `;
 
 export const ListHeaderMessageText = styled.Text`
+  font-family: Lato-Bold;
   font-size: 20px;
-  font-weight: 600;
   text-align: center;
   color: ${({theme}) => (isIOS ? theme.colors.light : theme.colors.darkGray)};
 `;
