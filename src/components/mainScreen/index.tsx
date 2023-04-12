@@ -1,14 +1,10 @@
 import React from 'react';
-import {
-  KeyboardAvoidingView,
-  Platform,
-  SafeAreaView,
-  StatusBar,
-} from 'react-native';
+import {Platform, StatusBar} from 'react-native';
 import {Task} from '../../types';
-import styles from './styles';
+import {KeyboardAvoid, Wrapper} from './styles';
 import List from '../list';
 import Form from '../form';
+import {useTheme} from 'styled-components/native';
 
 interface Props {
   tasksList: Task[];
@@ -17,6 +13,7 @@ interface Props {
 
 function MainScreen({tasksList, setTasksList}: Props) {
   const isIOS = Platform.OS === 'ios';
+  const theme = useTheme();
 
   const handlePressCard = (id: number) => {
     const newList = tasksList.map(task => {
@@ -52,21 +49,19 @@ function MainScreen({tasksList, setTasksList}: Props) {
     <>
       <StatusBar
         animated={true}
-        backgroundColor="#EEEEEE"
+        backgroundColor={theme.colors.white}
         barStyle={isIOS ? 'light-content' : 'dark-content'}
       />
-      <SafeAreaView style={styles.backgroundStyle}>
-        <KeyboardAvoidingView
-          behavior={isIOS ? 'padding' : undefined}
-          style={styles.mainContainer}>
+      <Wrapper>
+        <KeyboardAvoid behavior={isIOS ? 'padding' : undefined}>
           <List
             tasksList={tasksList}
             handlePressCard={handlePressCard}
             handleDeleteCard={handleDeleteCard}
           />
           <Form handleAddTask={handleAddTask} />
-        </KeyboardAvoidingView>
-      </SafeAreaView>
+        </KeyboardAvoid>
+      </Wrapper>
     </>
   );
 }

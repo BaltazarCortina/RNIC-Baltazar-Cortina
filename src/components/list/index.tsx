@@ -1,21 +1,26 @@
 import React from 'react';
-import {FlatList, Text, View} from 'react-native';
+import {FlatList} from 'react-native';
 import {Task} from '../../types';
-import styles from './styles';
+import {
+  EmptyListMessageContainer,
+  EmptyListMessageText,
+  ListHeaderMessageContainer,
+  ListHeaderMessageText,
+} from './styles';
 import Card from '../card';
 
 const EmptyListMessage = () => (
-  <View style={styles.emptyListMessageContainer}>
-    <Text style={styles.emptyListMessageText}>
+  <EmptyListMessageContainer>
+    <EmptyListMessageText>
       There are no tasks yet, add one!
-    </Text>
-  </View>
+    </EmptyListMessageText>
+  </EmptyListMessageContainer>
 );
 
 const ListHeader = () => (
-  <View style={styles.listHeaderContainer}>
-    <Text style={styles.listHeaderText}>Tasks List</Text>
-  </View>
+  <ListHeaderMessageContainer>
+    <ListHeaderMessageText>Tasks List</ListHeaderMessageText>
+  </ListHeaderMessageContainer>
 );
 
 interface Props {

@@ -1,14 +1,17 @@
 import React, {useRef, useState} from 'react';
+import {Keyboard, Platform, TextInput} from 'react-native';
 import {
-  Keyboard,
-  Platform,
-  Text,
-  TextInput,
-  TouchableHighlight,
-  View,
-} from 'react-native';
-import styles from './styles';
+  AddForm,
+  FormButton,
+  FormButtonContainer,
+  FormButtonText,
+  FormButtonTouchable,
+  FormField,
+  FormInput,
+  FormTitle,
+} from './styles';
 import CheckSvg from '../../assets/icons/check';
+import {useTheme} from 'styled-components/native';
 
 interface Props {
   handleAddTask: (title: string, description: string) => void;
@@ -16,6 +19,7 @@ interface Props {
 
 function Form({handleAddTask}: Props) {
   const isIOS = Platform.OS === 'ios';
+  const theme = useTheme();
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -29,44 +33,45 @@ function Form({handleAddTask}: Props) {
   };
 
   return (
-    <View style={styles.form} onTouchEnd={() => Keyboard.dismiss()}>
-      <Text style={styles.formTitle}>Add new task</Text>
-      <View style={styles.formField}>
-        <TextInput
+    <AddForm onTouchEnd={() => Keyboard.dismiss()}>
+      <FormTitle>Add new task</FormTitle>
+      <FormField>
+        <FormInput
           placeholder="Title"
-          placeholderTextColor={isIOS ? '#F5F5F5' : '#333333'}
-          style={styles.formInput}
+          placeholderTextColor={
+            isIOS ? theme.colors.white : theme.colors.lightGray
+          }
           value={title}
           onChangeText={setTitle}
           onTouchEnd={e => e.stopPropagation()}
           onSubmitEditing={() => descriptionInput.current?.focus()}
         />
-      </View>
-      <View style={styles.formField}>
-        <TextInput
+      </FormField>
+      <FormField>
+        <FormInput
           ref={descriptionInput}
           placeholder="Description"
-          placeholderTextColor={isIOS ? '#F5F5F5' : '#333333'}
-          style={styles.formInput}
+          placeholderTextColor={
+            isIOS ? theme.colors.white : theme.colors.lightGray
+          }
           value={description}
           onChangeText={setDescription}
           onTouchEnd={e => e.stopPropagation()}
           onSubmitEditing={handleAdd}
         />
-      </View>
-      <View style={styles.formButtonContainer}>
-        <TouchableHighlight
+      </FormField>
+      <FormButtonContainer>
+        <FormButtonTouchable
           activeOpacity={0.6}
-          underlayColor="#c2c2c2"
-          onPress={handleAdd}
-          style={styles.formButtonTouchable}>
-          <View style={styles.formButton}>
-            <CheckSvg color={'#212121'} />
-            <Text style={styles.formButtonText}>ADD</Text>
-          </View>
-        </TouchableHighlight>
-      </View>
-    </View>
+          underlayColor={theme.colors.highlight}
+          onPress={handleAdd}>
+          <FormButton>
+            <CheckSvg color={theme.colors.darkGray} />
+            <FormButtonText>ADD</FormButtonText>
+          </FormButton>
+        </FormButtonTouchable>
+      </FormButtonContainer>
+    </AddForm>
   );
 }
 
