@@ -1,13 +1,18 @@
 import React from 'react';
-import {Alert, Platform, View} from 'react-native';
+import {Alert, Platform} from 'react-native';
 import {useTheme} from 'styled-components/native';
+import {images} from '../../constants/images';
 import {Task} from '../../types';
 import {
   CardComponent,
   CardContainer,
   CardDescription,
+  CardImage,
+  CardLayout,
   CardStatus,
   CardTitle,
+  ImageContainer,
+  TextContainer,
 } from './styles';
 
 interface Props {
@@ -26,6 +31,12 @@ function Card({task, handlePress, handleDelete}: Props) {
       {text: 'Yes', onPress: () => handleDelete(task.id)},
     ]);
   };
+
+  const taskImage =
+    task.image && task.image in images.tasks
+      ? (task.image as keyof typeof images.tasks)
+      : undefined;
+
   return (
     <CardContainer>
       <CardComponent
@@ -33,17 +44,32 @@ function Card({task, handlePress, handleDelete}: Props) {
         underlayColor={isIOS ? theme.colors.lightGray : theme.colors.white}
         onPress={() => handlePress(task.id)}
         onLongPress={() => handleDeleteCard()}>
-        <View>
-          <CardTitle status={task.status} numberOfLines={1}>
-            {task.title}
-          </CardTitle>
-          <CardDescription status={task.status} numberOfLines={2}>
-            {task.description}
-          </CardDescription>
-          <CardStatus status={task.status}>
-            {task.status ? 'Done' : 'Pending'}
-          </CardStatus>
-        </View>
+        <CardLayout>
+          {taskImage && (
+            <ImageContainer>
+              <CardImage
+                alt={task.title}
+                // source={require('reactNativeCourse/src/assets/images/shopping.jpg')}
+                // source={require('../../assets/images/shopping.jpg')}
+                source={images.tasks[taskImage]}
+                onError={() => {
+                  console.log('error');
+                }}
+              />
+            </ImageContainer>
+          )}
+          <TextContainer>
+            <CardTitle status={task.status} numberOfLines={1}>
+              {task.title}
+            </CardTitle>
+            <CardDescription status={task.status} numberOfLines={2}>
+              {task.description}
+            </CardDescription>
+            <CardStatus status={task.status}>
+              {task.status ? 'Done' : 'Pending'}
+            </CardStatus>
+          </TextContainer>
+        </CardLayout>
       </CardComponent>
     </CardContainer>
   );

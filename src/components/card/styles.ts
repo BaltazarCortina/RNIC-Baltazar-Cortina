@@ -19,6 +19,27 @@ export const CardComponent = styled.TouchableHighlight`
   shadow-radius: 1px;
 `;
 
+export const CardLayout = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const ImageContainer = styled.View`
+  width: 20%;
+`;
+
+export const CardImage = styled.Image`
+  height: 60px;
+  margin-bottom: 10px
+  aspect-ratio: 1;
+  border-radius: 15px;
+`;
+
+export const TextContainer = styled.View`
+  flex-grow: 1;
+  width: 80%;
+`;
+
 export const CardTitle = styled.Text<{status: boolean}>`
   font-family: Lato-Bold;
   font-size: 18px;

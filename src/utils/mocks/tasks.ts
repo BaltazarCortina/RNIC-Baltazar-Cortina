@@ -6,6 +6,7 @@ export const mockTasks: Task[] = [
     title: 'This is a task',
     description: 'This is the description',
     status: false,
+    image: 'shopping',
   },
   {
     id: 1,
@@ -13,12 +14,14 @@ export const mockTasks: Task[] = [
     description:
       'This is a very long description that is going to need more than two lines. This is to test if the number of lines is working correctly',
     status: false,
+    image: 'notes',
   },
   {
     id: 2,
     title: 'This is a task with a very long title, it should take two lines',
     description: 'This is the description',
     status: false,
+    image: 'gym',
   },
   {
     id: 3,
