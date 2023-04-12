@@ -36,14 +36,24 @@ export const CardImage = styled.Image`
 `;
 
 export const TextContainer = styled.View`
-  flex-grow: 1;
-  width: 80%;
+  flex: 1;
+`;
+
+export const CardHeader = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const ActionsContainer = styled.View`
+  flex-direction: row;
+  gap: 15px;
 `;
 
 export const CardTitle = styled.Text<{status: boolean}>`
+  flex: 1;
   font-family: Lato-Bold;
   font-size: 18px;
-  padding-bottom: 5px;
+  padding: 0 10px 5px 0;
   color: ${({theme}) => (isIOS ? theme.colors.white : theme.colors.lightGray)};
   text-decoration-line: ${({status}) => (status ? 'line-through' : 'none')};
 `;
@@ -55,11 +65,8 @@ export const CardDescription = styled.Text<{status: boolean}>`
   text-decoration-line: ${({status}) => (status ? 'line-through' : 'none')};
 `;
 
-export const CardStatus = styled.Text<{status: boolean}>`
-  font-size: 14px;
-  font-family: Lato-BoldItalic;
-  text-align: right;
-  padding-top: 5px;
-  color: ${({status, theme}) =>
-    status ? theme.colors.green : theme.colors.red};
+export const CardStatus = styled.View<{status: boolean}>`
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-top: 10px;
 `;

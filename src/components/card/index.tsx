@@ -13,7 +13,13 @@ import {
   CardTitle,
   ImageContainer,
   TextContainer,
+  CardHeader,
+  ActionsContainer,
 } from './styles';
+import EditSvg from '../../assets/icons/edit';
+import TrashSvg from '../../assets/icons/trash';
+import SquareSvg from '../../assets/icons/square';
+import CheckSquareSvg from '../../assets/icons/checkSquare';
 
 interface Props {
   task: Task;
@@ -31,42 +37,51 @@ function Card({task, handlePress, handleDelete}: Props) {
       {text: 'Yes', onPress: () => handleDelete(task.id)},
     ]);
   };
+  const handleEditCard = () => {
+    Alert.alert('Coming soon!');
+  };
 
   const taskImage =
     task.image && task.image in images.tasks
       ? (task.image as keyof typeof images.tasks)
       : undefined;
 
+  const iconsColor = isIOS ? theme.colors.light : theme.colors.lightGray;
+
   return (
     <CardContainer>
       <CardComponent
         activeOpacity={0.6}
         underlayColor={isIOS ? theme.colors.lightGray : theme.colors.white}
-        onPress={() => handlePress(task.id)}
-        onLongPress={() => handleDeleteCard()}>
+        onPress={() => handlePress(task.id)}>
         <CardLayout>
           {taskImage && (
             <ImageContainer>
-              <CardImage
-                alt={task.title}
-                // source={require('reactNativeCourse/src/assets/images/shopping.jpg')}
-                // source={require('../../assets/images/shopping.jpg')}
-                source={images.tasks[taskImage]}
-                onError={() => {
-                  console.log('error');
-                }}
-              />
+              <CardImage alt={task.title} source={images.tasks[taskImage]} />
             </ImageContainer>
           )}
           <TextContainer>
-            <CardTitle status={task.status} numberOfLines={1}>
-              {task.title}
-            </CardTitle>
+            <CardHeader>
+              <CardTitle status={task.status} numberOfLines={1}>
+                {task.title}
+              </CardTitle>
+              <ActionsContainer>
+                <EditSvg color={iconsColor} onPress={() => handleEditCard()} />
+                <TrashSvg
+                  color={theme.colors.red}
+                  onPress={() => handleDeleteCard()}
+                />
+              </ActionsContainer>
+            </CardHeader>
             <CardDescription status={task.status} numberOfLines={2}>
               {task.description}
             </CardDescription>
             <CardStatus status={task.status}>
-              {task.status ? 'Done' : 'Pending'}
+              {task.status ? (
+                <CheckSquareSvg color={iconsColor} />
+              ) : (
+                <SquareSvg color={iconsColor} />
+              )}
             </CardStatus>
           </TextContainer>
         </CardLayout>

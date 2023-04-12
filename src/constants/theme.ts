@@ -15,7 +15,7 @@ const theme = {
     light: '#EEEEEE',
     white: '#F5F5F5',
     green: '#2b9348',
-    red: '#9a031e',
+    red: '#C71F37',
   },
 };
 
