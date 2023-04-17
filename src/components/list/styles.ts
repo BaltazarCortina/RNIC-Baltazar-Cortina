@@ -16,7 +16,7 @@ export const EmptyListMessageText = styled.Text`
 `;
 
 export const ListHeaderMessageContainer = styled.View`
-  padding: 5px 10px;
+  padding: 5px 10px 10px;
   margin: 5px 0;
   border-bottom-color: ${({theme}) => theme.colors.accent};
   border-bottom-width: 2px;

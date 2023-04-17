@@ -9,7 +9,9 @@ const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
   return (
-    <Tab.Navigator initialRouteName={Routes.TASK_LIST}>
+    <Tab.Navigator
+      initialRouteName={Routes.TASK_LIST}
+      screenOptions={{headerShown: false}}>
       <Tab.Screen
         name={Routes.TASK_LIST}
         options={{title: 'List'}}
