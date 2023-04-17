@@ -5,34 +5,24 @@
  * @format
  */
 
-import React, {useEffect, useState} from 'react';
-import {AppState} from 'react-native';
+import React, {useEffect} from 'react';
 import RNBootSplash from 'react-native-bootsplash';
 import {ThemeProvider} from 'styled-components/native';
 
-import MainScreen from './src/components/mainScreen';
+import MainWrapper from './src/components/mainWrapper';
 import {theme} from './src/constants/theme';
-import {mockTasks} from './src/utils/mocks/tasks';
+import Navigation from './src/navigation';
 
 function App(): JSX.Element {
-  const [tasksList, setTasksList] = useState(mockTasks);
-
   useEffect(() => {
     RNBootSplash.hide({fade: true});
-    const subscription = AppState.addEventListener('change', nextAppState => {
-      if (nextAppState === 'background') {
-        setTasksList(mockTasks);
-      }
-    });
-
-    return () => {
-      subscription.remove();
-    };
   }, []);
 
   return (
     <ThemeProvider theme={theme}>
-      <MainScreen tasksList={tasksList} setTasksList={setTasksList} />
+      <MainWrapper>
+        <Navigation />
+      </MainWrapper>
     </ThemeProvider>
   );
 }
