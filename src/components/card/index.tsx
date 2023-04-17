@@ -1,6 +1,7 @@
 import React from 'react';
 import {Alert, Platform} from 'react-native';
 import {useTheme} from 'styled-components/native';
+
 import {images} from '../../constants/images';
 import {Task} from '../../types';
 import {
@@ -20,23 +21,25 @@ import EditSvg from '../../assets/icons/edit';
 import TrashSvg from '../../assets/icons/trash';
 import SquareSvg from '../../assets/icons/square';
 import CheckSquareSvg from '../../assets/icons/checkSquare';
+import {useDispatch} from 'react-redux';
+import {changeTaskState, deleteTask} from '../../redux/tasks/tasksSlice';
 
 interface Props {
   task: Task;
-  handlePress: (id: number) => void;
-  handleDelete: (id: number) => void;
 }
 
-function Card({task, handlePress, handleDelete}: Props) {
+function Card({task}: Props) {
   const isIOS = Platform.OS === 'ios';
   const theme = useTheme();
+  const dispatch = useDispatch();
 
   const handleDeleteCard = () => {
     Alert.alert('Delete task?', 'Are you sure you want to delete this task?', [
       {text: 'Cancel', style: 'cancel'},
-      {text: 'Yes', onPress: () => handleDelete(task.id)},
+      {text: 'Yes', onPress: () => dispatch(deleteTask(task.id))},
     ]);
   };
+
   const handleEditCard = () => {
     Alert.alert('Coming soon!');
   };
@@ -53,7 +56,7 @@ function Card({task, handlePress, handleDelete}: Props) {
       <CardComponent
         activeOpacity={0.6}
         underlayColor={isIOS ? theme.colors.lightGray : theme.colors.white}
-        onPress={() => handlePress(task.id)}>
+        onPress={() => dispatch(changeTaskState(task.id))}>
         <CardLayout>
           {taskImage && (
             <ImageContainer>

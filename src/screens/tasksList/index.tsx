@@ -1,13 +1,13 @@
 import React from 'react';
-import {View} from 'react-native';
-import {Text} from 'react-native';
+import List from '../../components/list';
+import {Wrapper} from './styles';
 
-function TasksList() {
+const TasksList = () => {
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Tasks List</Text>
-    </View>
+    <Wrapper>
+      <List />
+    </Wrapper>
   );
-}
+};
 
 export default TasksList;

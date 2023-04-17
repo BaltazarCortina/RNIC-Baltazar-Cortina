@@ -1,6 +1,6 @@
 import React from 'react';
 import {FlatList} from 'react-native';
-import {Task} from '../../types';
+
 import {
   EmptyListMessageContainer,
   EmptyListMessageText,
@@ -8,6 +8,7 @@ import {
   ListHeaderMessageText,
 } from './styles';
 import Card from '../card';
+import {useAppSelector} from '../../redux/store';
 
 const EmptyListMessage = () => (
   <EmptyListMessageContainer>
@@ -23,27 +24,16 @@ const ListHeader = () => (
   </ListHeaderMessageContainer>
 );
 
-interface Props {
-  tasksList: Task[];
-  handlePressCard: (id: number) => void;
-  handleDeleteCard: (id: number) => void;
-}
-
-function List({tasksList, handlePressCard, handleDeleteCard}: Props) {
+const List = () => {
+  const tasksList = useAppSelector(state => state.tasks.tasksList);
   return (
     <FlatList
       data={tasksList}
-      renderItem={({item}) => (
-        <Card
-          task={item}
-          handlePress={handlePressCard}
-          handleDelete={handleDeleteCard}
-        />
-      )}
+      renderItem={({item}) => <Card task={item} />}
       ListEmptyComponent={EmptyListMessage}
       ListHeaderComponent={ListHeader}
     />
   );
-}
+};
 
 export default List;
