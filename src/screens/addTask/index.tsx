@@ -2,10 +2,14 @@ import React from 'react';
 import Form from '../../components/form';
 import {Wrapper} from './styles';
 
-function AddTask() {
+interface Props {
+  navigation: any;
+}
+
+function AddTask({navigation}: Props) {
   return (
     <Wrapper>
-      <Form />
+      <Form navigation={navigation} />
     </Wrapper>
   );
 }

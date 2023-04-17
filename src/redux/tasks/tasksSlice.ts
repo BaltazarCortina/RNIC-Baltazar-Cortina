@@ -19,22 +19,11 @@ export const taskSlice = createSlice({
   initialState,
   reducers: {
     changeTaskState: (state, action: PayloadAction<number>) => {
-      const newList = state.tasksList.map(task => {
+      state.tasksList.forEach(task => {
         if (task.id === action.payload) {
-          return {
-            ...task,
-            status: !task.status,
-          };
+          task.status = !task.status;
         }
-        return task;
       });
-      state.tasksList = newList;
-    },
-    deleteTask: (state, action: PayloadAction<number>) => {
-      const newList = state.tasksList.filter(
-        task => task.id !== action.payload,
-      );
-      state.tasksList = newList;
     },
     addTask: (
       state,
@@ -48,9 +37,39 @@ export const taskSlice = createSlice({
       };
       state.tasksList.push(newTask);
     },
+    deleteTask: (state, action: PayloadAction<number>) => {
+      state.tasksList = state.tasksList.filter(
+        task => task.id !== action.payload,
+      );
+    },
+    editTask: (state, action: PayloadAction<{task: Task}>) => {
+      const taskBody = action.payload.task;
+      state.tasksList.forEach(task => {
+        if (task.id === taskBody.id) {
+          task.title = taskBody.title;
+          task.description = taskBody.description;
+          task.date = taskBody.date;
+        }
+      });
+    },
+    setTaskToEdit: (state, action: PayloadAction<number>) => {
+      state.selectedTask = state.tasksList.find(
+        task => task.id === action.payload,
+      );
+    },
+    clearTask: state => {
+      state.selectedTask = undefined;
+    },
   },
 });
 
-export const {changeTaskState, addTask, deleteTask} = taskSlice.actions;
+export const {
+  changeTaskState,
+  addTask,
+  deleteTask,
+  setTaskToEdit,
+  editTask,
+  clearTask,
+} = taskSlice.actions;
 
 export default taskSlice.reducer;

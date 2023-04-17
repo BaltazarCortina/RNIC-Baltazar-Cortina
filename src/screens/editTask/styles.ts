@@ -3,12 +3,8 @@ import {Platform} from 'react-native';
 
 const isIOS = Platform.OS === 'ios';
 
-export const Wrapper = styled.SafeAreaView`
+export const Wrapper = styled.View`
   background-color: ${({theme}) =>
     isIOS ? theme.colors.darkGray : theme.colors.light};
-`;
-
-export const KeyboardAvoid = styled.KeyboardAvoidingView`
-  height: 100%;
-  justify-content: space-between;
+  flex: 1;
 `;

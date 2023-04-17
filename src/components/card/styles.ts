@@ -65,8 +65,11 @@ export const CardDescription = styled.Text<{status: boolean}>`
   text-decoration-line: ${({status}) => (status ? 'line-through' : 'none')};
 `;
 
-export const CardStatus = styled.View<{status: boolean}>`
+export const CardStatus = styled.View`
   flex-direction: row;
   justify-content: flex-end;
-  padding-top: 10px;
+`;
+
+export const CardStatusIcon = styled.TouchableHighlight`
+  margin-top: 10px;
 `;

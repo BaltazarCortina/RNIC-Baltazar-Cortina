@@ -31,11 +31,11 @@ export const FormField = styled.View`
   padding-bottom: 20px;
 `;
 
-export const FormInput = styled.TextInput`
+export const FormInput = styled.TextInput<{longInput?: boolean}>`
   font-family: Lato-Italic;
   font-size: 16px;
-  height: 50px;
-  padding: 5px 15px;
+  height: ${({longInput}) => (!longInput ? '50px' : '150px')};
+  padding: 15px;
   border-color: ${({theme}) =>
     isIOS ? theme.colors.white : theme.colors.lightGray};
   border-width: 1px;
@@ -44,7 +44,8 @@ export const FormInput = styled.TextInput`
 `;
 
 export const FormButtonContainer = styled.View`
-  align-items: flex-end;
+  flex-direction: row-reverse;
+  justify-content: space-between;
   padding: 0 20px;
 `;
 
@@ -52,15 +53,16 @@ export const FormButtonTouchable = styled.TouchableHighlight`
   border-radius: 10px;
 `;
 
-export const FormButton = styled.View`
+export const FormButton = styled.View<{type?: 'delete'}>`
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 5px;
-  width: 100px;
+  width: 120px;
   padding: 8px;
   border-radius: 10px;
-  background-color: ${({theme}) => theme.colors.accent};
+  background-color: ${({theme, type}) =>
+    type === 'delete' ? theme.colors.red : theme.colors.accent};
 `;
 
 export const FormButtonText = styled.Text`

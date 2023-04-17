@@ -1,12 +1,17 @@
 import React from 'react';
-import {View} from 'react-native';
-import {Text} from 'react-native';
 
-function EditTask() {
+import Form from '../../components/form';
+import {Wrapper} from './styles';
+
+interface Props {
+  navigation: any;
+}
+
+function EditTask({navigation}: Props) {
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Edit Task</Text>
-    </View>
+    <Wrapper>
+      <Form navigation={navigation} />
+    </Wrapper>
   );
 }
 

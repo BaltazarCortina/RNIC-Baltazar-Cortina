@@ -1,5 +1,5 @@
-import React, {useRef, useState} from 'react';
-import {Keyboard, Platform, TextInput} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {Alert, Keyboard, Platform, TextInput} from 'react-native';
 import {
   AddForm,
   CardImage,
@@ -13,42 +13,83 @@ import {
   ImageContainer,
 } from './styles';
 import CheckSvg from '../../assets/icons/check';
+import TrashSvg from '../../assets/icons/trash';
 import {useTheme} from 'styled-components/native';
 import {useDispatch} from 'react-redux';
-import {addTask} from '../../redux/tasks/tasksSlice';
-import {mockTasks} from '../../utils/mocks/tasks';
+import {
+  addTask,
+  clearTask,
+  deleteTask,
+  editTask,
+} from '../../redux/tasks/tasksSlice';
 import {images} from '../../constants/images';
+import {useAppSelector} from '../../redux/store';
+import {Routes} from '../../types/routes';
 
-function Form() {
+interface Props {
+  navigation: any;
+}
+
+function Form({navigation}: Props) {
   const isIOS = Platform.OS === 'ios';
   const theme = useTheme();
   const dispatch = useDispatch();
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const selectedTask = useAppSelector(state => state.tasks.selectedTask);
+
+  const [title, setTitle] = useState(selectedTask?.title || '');
+  const [description, setDescription] = useState(
+    selectedTask?.description || '',
+  );
 
   const descriptionInput = useRef<TextInput>(null);
 
+  useEffect(() => {
+    return () => {
+      dispatch(clearTask());
+    };
+  }, [dispatch]);
+
   const handleAdd = () => {
     if (title && description) {
-      dispatch(addTask({title, description}));
+      if (selectedTask) {
+        const task = {...selectedTask, title, description};
+        dispatch(editTask({task}));
+      } else {
+        dispatch(addTask({title, description}));
+      }
       setTitle('');
       setDescription('');
+      navigation.navigate(Routes.TASK_LIST);
     }
   };
 
-  const task = mockTasks[4];
+  const handleDeleteCard = () => {
+    Alert.alert('Delete task?', 'Are you sure you want to delete this task?', [
+      {text: 'Cancel', style: 'cancel'},
+      {
+        text: 'Yes',
+        onPress: () => {
+          selectedTask && dispatch(deleteTask(selectedTask.id));
+          navigation.navigate(Routes.TASK_LIST);
+        },
+      },
+    ]);
+  };
 
   const taskImage =
-    task?.image && task.image in images.tasks
-      ? (task.image as keyof typeof images.tasks)
+    selectedTask?.image && selectedTask.image in images.tasks
+      ? (selectedTask.image as keyof typeof images.tasks)
       : 'noImage';
 
   return (
     <AddForm onTouchEnd={() => Keyboard.dismiss()}>
       <FormFields>
         <ImageContainer>
-          <CardImage alt={task?.title} source={images.tasks[taskImage]} />
+          <CardImage
+            alt={selectedTask?.title}
+            source={images.tasks[taskImage]}
+          />
         </ImageContainer>
         <FormField>
           <FormInput
@@ -69,6 +110,8 @@ function Form() {
             placeholderTextColor={
               isIOS ? theme.colors.white : theme.colors.lightGray
             }
+            multiline
+            longInput={true}
             value={description}
             onChangeText={setDescription}
             onTouchEnd={e => e.stopPropagation()}
@@ -83,9 +126,20 @@ function Form() {
           onPress={handleAdd}>
           <FormButton>
             <CheckSvg color={theme.colors.darkGray} />
-            <FormButtonText>ADD</FormButtonText>
+            <FormButtonText>{selectedTask ? 'SAVE' : 'ADD'}</FormButtonText>
           </FormButton>
         </FormButtonTouchable>
+        {selectedTask && (
+          <FormButtonTouchable
+            activeOpacity={0.6}
+            underlayColor={theme.colors.highlight}
+            onPress={handleDeleteCard}>
+            <FormButton type="delete">
+              <TrashSvg color={theme.colors.darkGray} />
+              <FormButtonText>DELETE</FormButtonText>
+            </FormButton>
+          </FormButtonTouchable>
+        )}
       </FormButtonContainer>
     </AddForm>
   );
