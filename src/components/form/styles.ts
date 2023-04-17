@@ -4,29 +4,37 @@ import {Platform} from 'react-native';
 const isIOS = Platform.OS === 'ios';
 
 export const AddForm = styled.View`
-  padding: 10px;
-  margin-top: 5px;
-  border-top-color: ${({theme}) => theme.colors.accent};
-  border-top-width: 2px;
+  flex: 1;
+  justify-content: space-between;
+  padding: 10px 10px 20px;
   background-color: ${({theme}) =>
     isIOS ? theme.colors.lightGray : theme.colors.white};
 `;
 
-export const FormTitle = styled.Text`
-  font-family: Lato-BoldItalic;
-  font-size: 16px;
-  text-align: center;
+export const FormFields = styled.View`
   padding-bottom: 10px;
-  color: ${({theme}) => (isIOS ? theme.colors.light : theme.colors.darkGray)};
+`;
+
+export const ImageContainer = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  margin: 40px 0 50px;
+`;
+
+export const CardImage = styled.Image`
+  width: 200px;
+  aspect-ratio: 1;
+  border-radius: 15px;
 `;
 
 export const FormField = styled.View`
-  padding-bottom: 10px;
+  padding-bottom: 20px;
 `;
 
 export const FormInput = styled.TextInput`
   font-family: Lato-Italic;
-  height: 40px;
+  font-size: 16px;
+  height: 50px;
   padding: 5px 15px;
   border-color: ${({theme}) =>
     isIOS ? theme.colors.white : theme.colors.lightGray};
@@ -36,7 +44,8 @@ export const FormInput = styled.TextInput`
 `;
 
 export const FormButtonContainer = styled.View`
-  align-items: center;
+  align-items: flex-end;
+  padding: 0 20px;
 `;
 
 export const FormButtonTouchable = styled.TouchableHighlight`

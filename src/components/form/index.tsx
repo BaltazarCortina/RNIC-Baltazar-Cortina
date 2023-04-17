@@ -2,24 +2,27 @@ import React, {useRef, useState} from 'react';
 import {Keyboard, Platform, TextInput} from 'react-native';
 import {
   AddForm,
+  CardImage,
   FormButton,
   FormButtonContainer,
   FormButtonText,
   FormButtonTouchable,
   FormField,
+  FormFields,
   FormInput,
-  FormTitle,
+  ImageContainer,
 } from './styles';
 import CheckSvg from '../../assets/icons/check';
 import {useTheme} from 'styled-components/native';
+import {useDispatch} from 'react-redux';
+import {addTask} from '../../redux/tasks/tasksSlice';
+import {mockTasks} from '../../utils/mocks/tasks';
+import {images} from '../../constants/images';
 
-interface Props {
-  handleAddTask: (title: string, description: string) => void;
-}
-
-function Form({handleAddTask}: Props) {
+function Form() {
   const isIOS = Platform.OS === 'ios';
   const theme = useTheme();
+  const dispatch = useDispatch();
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -27,39 +30,52 @@ function Form({handleAddTask}: Props) {
   const descriptionInput = useRef<TextInput>(null);
 
   const handleAdd = () => {
-    handleAddTask(title, description);
-    setTitle('');
-    setDescription('');
+    if (title && description) {
+      dispatch(addTask({title, description}));
+      setTitle('');
+      setDescription('');
+    }
   };
+
+  const task = mockTasks[4];
+
+  const taskImage =
+    task?.image && task.image in images.tasks
+      ? (task.image as keyof typeof images.tasks)
+      : 'noImage';
 
   return (
     <AddForm onTouchEnd={() => Keyboard.dismiss()}>
-      <FormTitle>Add new task</FormTitle>
-      <FormField>
-        <FormInput
-          placeholder="Title"
-          placeholderTextColor={
-            isIOS ? theme.colors.white : theme.colors.lightGray
-          }
-          value={title}
-          onChangeText={setTitle}
-          onTouchEnd={e => e.stopPropagation()}
-          onSubmitEditing={() => descriptionInput.current?.focus()}
-        />
-      </FormField>
-      <FormField>
-        <FormInput
-          ref={descriptionInput}
-          placeholder="Description"
-          placeholderTextColor={
-            isIOS ? theme.colors.white : theme.colors.lightGray
-          }
-          value={description}
-          onChangeText={setDescription}
-          onTouchEnd={e => e.stopPropagation()}
-          onSubmitEditing={handleAdd}
-        />
-      </FormField>
+      <FormFields>
+        <ImageContainer>
+          <CardImage alt={task?.title} source={images.tasks[taskImage]} />
+        </ImageContainer>
+        <FormField>
+          <FormInput
+            placeholder="Title"
+            placeholderTextColor={
+              isIOS ? theme.colors.white : theme.colors.lightGray
+            }
+            value={title}
+            onChangeText={setTitle}
+            onTouchEnd={e => e.stopPropagation()}
+            onSubmitEditing={() => descriptionInput.current?.focus()}
+          />
+        </FormField>
+        <FormField>
+          <FormInput
+            ref={descriptionInput}
+            placeholder="Description"
+            placeholderTextColor={
+              isIOS ? theme.colors.white : theme.colors.lightGray
+            }
+            value={description}
+            onChangeText={setDescription}
+            onTouchEnd={e => e.stopPropagation()}
+            onSubmitEditing={handleAdd}
+          />
+        </FormField>
+      </FormFields>
       <FormButtonContainer>
         <FormButtonTouchable
           activeOpacity={0.6}

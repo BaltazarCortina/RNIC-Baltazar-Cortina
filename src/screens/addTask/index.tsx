@@ -1,12 +1,12 @@
 import React from 'react';
-import {View} from 'react-native';
-import {Text} from 'react-native';
+import Form from '../../components/form';
+import {Wrapper} from './styles';
 
 function AddTask() {
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Add Task</Text>
-    </View>
+    <Wrapper>
+      <Form />
+    </Wrapper>
   );
 }
 
