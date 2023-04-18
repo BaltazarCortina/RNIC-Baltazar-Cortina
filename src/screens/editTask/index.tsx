@@ -3,14 +3,10 @@ import React from 'react';
 import Form from '../../components/form';
 import {Wrapper} from './styles';
 
-interface Props {
-  navigation: any;
-}
-
-function EditTask({navigation}: Props) {
+function EditTask() {
   return (
     <Wrapper>
-      <Form navigation={navigation} />
+      <Form />
     </Wrapper>
   );
 }

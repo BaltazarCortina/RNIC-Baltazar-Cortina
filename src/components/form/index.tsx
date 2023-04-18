@@ -1,5 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Alert, Keyboard, Platform, TextInput} from 'react-native';
+import {useTheme} from 'styled-components/native';
+import {useDispatch} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
 import {
   AddForm,
   CardImage,
@@ -12,28 +17,29 @@ import {
   FormInput,
   ImageContainer,
 } from './styles';
-import CheckSvg from '../../assets/icons/check';
-import TrashSvg from '../../assets/icons/trash';
-import {useTheme} from 'styled-components/native';
-import {useDispatch} from 'react-redux';
 import {
   addTask,
   clearTask,
   deleteTask,
   editTask,
 } from '../../redux/tasks/tasksSlice';
+import CheckSvg from '../../assets/icons/check';
+import TrashSvg from '../../assets/icons/trash';
 import {images} from '../../constants/images';
 import {useAppSelector} from '../../redux/store';
 import {Routes} from '../../types/routes';
+import {RootParamsList} from '../../types/navigation';
 
-interface Props {
-  navigation: any;
-}
+type NavigationProps = NativeStackNavigationProp<
+  RootParamsList,
+  Routes.EDIT_TASK | Routes.ADD_TASK
+>;
 
-function Form({navigation}: Props) {
+function Form() {
   const isIOS = Platform.OS === 'ios';
   const theme = useTheme();
   const dispatch = useDispatch();
+  const navigation = useNavigation<NavigationProps>();
 
   const selectedTask = useAppSelector(state => state.tasks.selectedTask);
 

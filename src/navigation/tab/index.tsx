@@ -8,8 +8,7 @@ import ListSvg from '../../assets/icons/list';
 import AddSvg from '../../assets/icons/add';
 import {SvgProps} from 'react-native-svg';
 import {theme} from '../../constants/theme';
-
-const Tab = createBottomTabNavigator();
+import {RootTabParamList} from '../../types/navigation';
 
 const NavBarIcon = (Icon: (props: SvgProps) => JSX.Element) => {
   return (props: any) => (
@@ -23,6 +22,8 @@ const NavBarIcon = (Icon: (props: SvgProps) => JSX.Element) => {
 
 const ListIcon = NavBarIcon(ListSvg);
 const AddIcon = NavBarIcon(AddSvg);
+
+const Tab = createBottomTabNavigator<RootTabParamList>();
 
 const TabNavigator = () => {
   return (

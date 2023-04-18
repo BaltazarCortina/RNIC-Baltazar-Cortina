@@ -16,6 +16,7 @@ import {
 } from './styles';
 import BackSvg from '../../assets/icons/back';
 import {Platform} from 'react-native';
+import {RootStackParamList} from '../../types/navigation';
 
 const StackNavHeader = ({options, navigation}: NativeStackHeaderProps) => {
   const theme = useTheme();
@@ -35,12 +36,12 @@ const StackNavHeader = ({options, navigation}: NativeStackHeaderProps) => {
   );
 };
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const StackNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName={Routes.TAB_NAVIGATOR}
       screenOptions={{
         header: StackNavHeader,
       }}>
