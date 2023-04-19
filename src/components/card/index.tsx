@@ -23,16 +23,23 @@ import {useDispatch} from 'react-redux';
 import {changeTaskState, setTaskToEdit} from '../../redux/tasks/tasksSlice';
 import {useNavigation} from '@react-navigation/native';
 import {Routes} from '../../types/routes';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootParamsList} from '../../types/navigation';
 
 interface Props {
   task: Task;
 }
 
+type NavigationProps = NativeStackNavigationProp<
+  RootParamsList,
+  Routes.EDIT_TASK | Routes.ADD_TASK
+>;
+
 function Card({task}: Props) {
   const isIOS = Platform.OS === 'ios';
   const theme = useTheme();
   const dispatch = useDispatch();
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProps>();
 
   const handleEditCard = () => {
     dispatch(setTaskToEdit(task.id));
@@ -69,7 +76,10 @@ function Card({task}: Props) {
             </CardDescription>
             <CardStatus>
               <CardStatusIcon
-                onPress={() => dispatch(changeTaskState(task.id))}>
+                onPress={() => dispatch(changeTaskState(task.id))}
+                underlayColor={
+                  isIOS ? theme.colors.lightGray : theme.colors.white
+                }>
                 {task.status ? (
                   <CheckSquareSvg color={iconsColor} />
                 ) : (
