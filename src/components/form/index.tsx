@@ -12,10 +12,12 @@ import {
   FormButtonContainer,
   FormButtonText,
   FormButtonTouchable,
+  FormDate,
   FormField,
   FormFields,
   FormInput,
   ImageContainer,
+  KeyboardAvoid,
 } from './styles';
 import {
   addTask,
@@ -29,6 +31,7 @@ import {images} from '../../constants/images';
 import {useAppSelector} from '../../redux/store';
 import {Routes} from '../../types/routes';
 import {RootParamsList} from '../../types/navigation';
+import DatePicker from 'react-native-date-picker';
 
 type NavigationProps = NativeStackNavigationProp<
   RootParamsList,
@@ -43,10 +46,13 @@ function Form() {
 
   const selectedTask = useAppSelector(state => state.tasks.selectedTask);
 
+  const [showDatePicker, setShowDatePicker] = useState(false);
+
   const [title, setTitle] = useState(selectedTask?.title || '');
   const [description, setDescription] = useState(
     selectedTask?.description || '',
   );
+  const [date, setDate] = useState(new Date(selectedTask?.date || new Date()));
 
   const descriptionInput = useRef<TextInput>(null);
 
@@ -58,14 +64,21 @@ function Form() {
 
   const handleAdd = () => {
     if (title && description) {
+      const formattedDate = date.toUTCString();
       if (selectedTask) {
-        const task = {...selectedTask, title, description};
+        const task = {
+          ...selectedTask,
+          title,
+          description,
+          date: formattedDate,
+        };
         dispatch(editTask({task}));
       } else {
-        dispatch(addTask({title, description}));
+        dispatch(addTask({title, description, date: formattedDate}));
       }
       setTitle('');
       setDescription('');
+      setDate(new Date());
       navigation.navigate(Routes.TASK_LIST);
     }
   };
@@ -88,65 +101,89 @@ function Form() {
       ? (selectedTask.image as keyof typeof images.tasks)
       : 'noImage';
 
+  const onConfirmDate = (selectedDate: Date) => {
+    setDate(selectedDate);
+    setShowDatePicker(false);
+  };
+
+  const onCancelDate = () => {
+    setShowDatePicker(false);
+  };
+
   return (
     <AddForm onTouchEnd={() => Keyboard.dismiss()}>
-      <FormFields>
-        <ImageContainer>
-          <CardImage
-            alt={selectedTask?.title}
-            source={images.tasks[taskImage]}
-          />
-        </ImageContainer>
-        <FormField>
-          <FormInput
-            placeholder="Title"
-            placeholderTextColor={
-              isIOS ? theme.colors.white : theme.colors.lightGray
-            }
-            value={title}
-            onChangeText={setTitle}
-            onTouchEnd={e => e.stopPropagation()}
-            onSubmitEditing={() => descriptionInput.current?.focus()}
-          />
-        </FormField>
-        <FormField>
-          <FormInput
-            ref={descriptionInput}
-            placeholder="Description"
-            placeholderTextColor={
-              isIOS ? theme.colors.white : theme.colors.lightGray
-            }
-            multiline
-            longInput={true}
-            value={description}
-            onChangeText={setDescription}
-            onTouchEnd={e => e.stopPropagation()}
-            onSubmitEditing={handleAdd}
-          />
-        </FormField>
-      </FormFields>
-      <FormButtonContainer>
-        <FormButtonTouchable
-          activeOpacity={0.6}
-          underlayColor={theme.colors.highlight}
-          onPress={handleAdd}>
-          <FormButton>
-            <CheckSvg color={theme.colors.darkGray} />
-            <FormButtonText>{selectedTask ? 'SAVE' : 'ADD'}</FormButtonText>
-          </FormButton>
-        </FormButtonTouchable>
-        {selectedTask && (
+      <ImageContainer>
+        <CardImage alt={selectedTask?.title} source={images.tasks[taskImage]} />
+      </ImageContainer>
+      <KeyboardAvoid behavior={isIOS ? 'padding' : undefined}>
+        <FormFields>
+          <FormField>
+            <FormInput
+              placeholder="Title"
+              placeholderTextColor={
+                isIOS ? theme.colors.white : theme.colors.lightGray
+              }
+              value={title}
+              onChangeText={setTitle}
+              onTouchEnd={e => e.stopPropagation()}
+              onSubmitEditing={() => descriptionInput.current?.focus()}
+            />
+          </FormField>
+          <FormField>
+            <FormInput
+              ref={descriptionInput}
+              placeholder="Description"
+              placeholderTextColor={
+                isIOS ? theme.colors.white : theme.colors.lightGray
+              }
+              multiline
+              longInput={true}
+              value={description}
+              onChangeText={setDescription}
+              onTouchEnd={e => e.stopPropagation()}
+            />
+          </FormField>
+          <FormField>
+            <FormDate
+              onPress={e => {
+                e.stopPropagation();
+                setShowDatePicker(true);
+              }}>
+              Due date: {date.toLocaleDateString()}
+            </FormDate>
+            <DatePicker
+              modal
+              mode="date"
+              open={showDatePicker}
+              date={date}
+              onConfirm={onConfirmDate}
+              onCancel={onCancelDate}
+            />
+          </FormField>
+        </FormFields>
+        <FormButtonContainer>
           <FormButtonTouchable
             activeOpacity={0.6}
             underlayColor={theme.colors.highlight}
-            onPress={handleDeleteCard}>
-            <FormButton type="delete">
-              <TrashSvg color={theme.colors.darkGray} />
-              <FormButtonText>DELETE</FormButtonText>
+            onPress={handleAdd}>
+            <FormButton>
+              <CheckSvg color={theme.colors.darkGray} />
+              <FormButtonText>{selectedTask ? 'SAVE' : 'ADD'}</FormButtonText>
             </FormButton>
           </FormButtonTouchable>
-        )}
-      </FormButtonContainer>
+          {selectedTask && (
+            <FormButtonTouchable
+              activeOpacity={0.6}
+              underlayColor={theme.colors.highlight}
+              onPress={handleDeleteCard}>
+              <FormButton type="delete">
+                <TrashSvg color={theme.colors.darkGray} />
+                <FormButtonText>DELETE</FormButtonText>
+              </FormButton>
+            </FormButtonTouchable>
+          )}
+        </FormButtonContainer>
+      </KeyboardAvoid>
     </AddForm>
   );
 }

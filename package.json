@@ -6,6 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios --simulator='iPhone 14'",
     "both": "react-native run-ios --simulator='iPhone 14' && react-native run-android --port 9988",
+    "android-usb": "react-native run-android --port 9988",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest"
@@ -19,6 +20,7 @@
     "react": "18.2.0",
     "react-native": "0.71.4",
     "react-native-bootsplash": "^4.6.0",
+    "react-native-date-picker": "^4.2.11",
     "react-native-safe-area-context": "^4.5.1",
     "react-native-screens": "^3.20.0",
     "react-native-svg": "^13.9.0",

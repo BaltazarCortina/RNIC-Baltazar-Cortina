@@ -27,12 +27,13 @@ export const taskSlice = createSlice({
     },
     addTask: (
       state,
-      action: PayloadAction<{title: string; description: string}>,
+      action: PayloadAction<{title: string; description: string; date: string}>,
     ) => {
       const newTask = {
         id: state.tasksList.length,
         title: action.payload.title,
         description: action.payload.description,
+        date: action.payload.date,
         status: false,
       };
       state.tasksList.push(newTask);

@@ -8,7 +8,7 @@ export const Wrapper = styled.SafeAreaView`
     isIOS ? theme.colors.darkGray : theme.colors.light};
 `;
 
-export const KeyboardAvoid = styled.KeyboardAvoidingView`
+export const MainView = styled.View`
   height: 100%;
   justify-content: space-between;
 `;

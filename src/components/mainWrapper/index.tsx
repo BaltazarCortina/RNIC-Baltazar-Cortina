@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 import {Platform, StatusBar} from 'react-native';
-import {KeyboardAvoid, Wrapper} from './styles';
+import {MainView, Wrapper} from './styles';
 import {useTheme} from 'styled-components/native';
 
 interface Props {
@@ -19,9 +19,7 @@ function MainWrapper({children}: Props) {
         barStyle={isIOS ? 'light-content' : 'dark-content'}
       />
       <Wrapper>
-        <KeyboardAvoid behavior={isIOS ? 'padding' : undefined}>
-          {children}
-        </KeyboardAvoid>
+        <MainView>{children}</MainView>
       </Wrapper>
     </>
   );
