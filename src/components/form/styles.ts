@@ -4,30 +4,60 @@ import {Platform} from 'react-native';
 const isIOS = Platform.OS === 'ios';
 
 export const AddForm = styled.View`
-  padding: 10px;
-  margin-top: 5px;
-  border-top-color: ${({theme}) => theme.colors.accent};
-  border-top-width: 2px;
+  flex: 1;
+  justify-content: space-between;
+  padding: 10px 10px 20px;
   background-color: ${({theme}) =>
     isIOS ? theme.colors.lightGray : theme.colors.white};
 `;
 
-export const FormTitle = styled.Text`
-  font-family: Lato-BoldItalic;
-  font-size: 16px;
-  text-align: center;
-  padding-bottom: 10px;
-  color: ${({theme}) => (isIOS ? theme.colors.light : theme.colors.darkGray)};
+export const ImageContainer = styled.View`
+  flex-shrink: 1;
+  flex-direction: row;
+  justify-content: center;
+  margin: 40px 0 40px;
+`;
+
+export const CardImage = styled.Image`
+  width: 200px;
+  aspect-ratio: 1;
+  border-radius: 15px;
+`;
+
+export const KeyboardAvoid = styled.KeyboardAvoidingView`
+  background-color: ${({theme}) =>
+    isIOS ? theme.colors.lightGray : theme.colors.white};
+  z-index: 1;
+`;
+
+export const FormFields = styled.View`
+  padding: 10px 0;
+  background-color: ${({theme}) =>
+    isIOS ? theme.colors.lightGray : theme.colors.white};
+  z-index: 1;
 `;
 
 export const FormField = styled.View`
-  padding-bottom: 10px;
+  padding-bottom: 20px;
 `;
 
-export const FormInput = styled.TextInput`
+export const FormInput = styled.TextInput<{longInput?: boolean}>`
   font-family: Lato-Italic;
-  height: 40px;
-  padding: 5px 15px;
+  font-size: 16px;
+  height: ${({longInput}) => (!longInput ? '50px' : '150px')};
+  padding: 15px;
+  border-color: ${({theme}) =>
+    isIOS ? theme.colors.white : theme.colors.lightGray};
+  border-width: 1px;
+  border-radius: 15px;
+  color: ${({theme}) => (isIOS ? theme.colors.white : theme.colors.lightGray)};
+`;
+
+export const FormDate = styled.Text`
+  font-family: Lato-Italic;
+  font-size: 16px;
+  height: 50px;
+  padding: 15px;
   border-color: ${({theme}) =>
     isIOS ? theme.colors.white : theme.colors.lightGray};
   border-width: 1px;
@@ -36,22 +66,25 @@ export const FormInput = styled.TextInput`
 `;
 
 export const FormButtonContainer = styled.View`
-  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  padding: 0 20px;
 `;
 
 export const FormButtonTouchable = styled.TouchableHighlight`
   border-radius: 10px;
 `;
 
-export const FormButton = styled.View`
+export const FormButton = styled.View<{type?: 'delete'}>`
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 5px;
-  width: 100px;
+  width: 120px;
   padding: 8px;
   border-radius: 10px;
-  background-color: ${({theme}) => theme.colors.accent};
+  background-color: ${({theme, type}) =>
+    type === 'delete' ? theme.colors.red : theme.colors.accent};
 `;
 
 export const FormButtonText = styled.Text`

@@ -4,4 +4,5 @@ export interface Task {
   description: string;
   status: boolean;
   image?: string;
+  date?: string;
 }

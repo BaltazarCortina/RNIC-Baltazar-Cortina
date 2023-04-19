@@ -5,35 +5,32 @@
  * @format
  */
 
-import React, {useEffect, useState} from 'react';
-import {AppState} from 'react-native';
+import React, {useEffect} from 'react';
 import RNBootSplash from 'react-native-bootsplash';
+import {Provider as ReduxProvider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
 import {ThemeProvider} from 'styled-components/native';
 
-import MainScreen from './src/components/mainScreen';
+import MainWrapper from './src/components/mainWrapper';
 import {theme} from './src/constants/theme';
-import {mockTasks} from './src/utils/mocks/tasks';
+import Navigation from './src/navigation';
+import {persistor, store} from './src/redux/store';
 
 function App(): JSX.Element {
-  const [tasksList, setTasksList] = useState(mockTasks);
-
   useEffect(() => {
     RNBootSplash.hide({fade: true});
-    const subscription = AppState.addEventListener('change', nextAppState => {
-      if (nextAppState === 'background') {
-        setTasksList(mockTasks);
-      }
-    });
-
-    return () => {
-      subscription.remove();
-    };
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      <MainScreen tasksList={tasksList} setTasksList={setTasksList} />
-    </ThemeProvider>
+    <ReduxProvider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <ThemeProvider theme={theme}>
+          <MainWrapper>
+            <Navigation />
+          </MainWrapper>
+        </ThemeProvider>
+      </PersistGate>
+    </ReduxProvider>
   );
 }
 
