@@ -27,7 +27,11 @@ const StackNavHeader = ({options, navigation}: NativeStackHeaderProps) => {
       <BackIconContainer
         onPress={() => navigation.goBack()}
         underlayColor={isIOS ? theme.colors.lightGray : theme.colors.white}>
-        <BackSvg color={theme.colors.light} height={32} width={32} />
+        <BackSvg
+          color={isIOS ? theme.colors.light : theme.colors.darkGray}
+          height={32}
+          width={32}
+        />
       </BackIconContainer>
       <StackNavHeaderMessageContainer>
         <StackNavHeaderMessageText>{options.title}</StackNavHeaderMessageText>

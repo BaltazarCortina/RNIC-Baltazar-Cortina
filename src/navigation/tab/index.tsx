@@ -32,7 +32,10 @@ const TabNavigator = () => {
       screenOptions={{
         headerShown: false,
         tabBarLabelStyle: {color: theme.colors.light, fontSize: 12},
-        tabBarStyle: {backgroundColor: theme.colors.darkGray},
+        tabBarStyle: {
+          backgroundColor: theme.colors.darkGray,
+          height: 60,
+        },
       }}>
       <Tab.Screen
         name={Routes.TASK_LIST}
