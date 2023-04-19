@@ -8,12 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* reactNativeCourseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* reactNativeCourseTests.m */; };
+		0285AD9CE46545CDA02B9335 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DA2C4C1A87D496596AECF08 /* Lato-Italic.ttf */; };
+		0353DFE47A024BC1BF78D396 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 860A19725C144188AF696261 /* Lato-Regular.ttf */; };
 		0C80B921A6F3F58F76C31292 /* libPods-reactNativeCourse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-reactNativeCourse.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		27400812B0D742E6AD29279F /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F0692C5441AD46B991426AA0 /* Lato-Bold.ttf */; };
+		3219C8F888D64300838CADEF /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = C2FBCBB4B5A44BF994288B3E /* OFL.txt */; };
+		4E4B1F2C31CC4D72A3D824F6 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A8C0E4CEC744CFDAF54CC0D /* Lato-Black.ttf */; };
+		55F1DFA429E4EE840034A9A9 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55F1DFA329E4EE840034A9A9 /* BootSplash.storyboard */; };
 		7699B88040F8A987B510C191 /* libPods-reactNativeCourse-reactNativeCourseTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-reactNativeCourse-reactNativeCourseTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		9424B7EF3AD1411CADD00C0F /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89A711D2F2E14DFCA3CE5EEF /* Lato-BlackItalic.ttf */; };
+		A15DBD8C927742969FEDE3A7 /* Lato-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0E23AB2C4629423A82BB36F0 /* Lato-ThinItalic.ttf */; };
+		A8EB12CA65914018BAD430EC /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3548101198BD4C6994EA8575 /* Lato-Light.ttf */; };
+		B378D951A02C452996BB2037 /* Lato-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 842210825F854EF590CDC193 /* Lato-BoldItalic.ttf */; };
+		CA297262E2C248EB83F2F728 /* Lato-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1397A7900E174F22B07CC4E7 /* Lato-Thin.ttf */; };
+		F4F45EF527594CBF8D9EF57D /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0C10F88D4964D2D91A00D2C /* Lato-LightItalic.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +42,8 @@
 		00E356EE1AD99517003FC87E /* reactNativeCourseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = reactNativeCourseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* reactNativeCourseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = reactNativeCourseTests.m; sourceTree = "<group>"; };
+		0E23AB2C4629423A82BB36F0 /* Lato-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-ThinItalic.ttf"; path = "../src/assets/fonts/Lato-ThinItalic.ttf"; sourceTree = "<group>"; };
+		1397A7900E174F22B07CC4E7 /* Lato-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Thin.ttf"; path = "../src/assets/fonts/Lato-Thin.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* reactNativeCourse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = reactNativeCourse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = reactNativeCourse/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = reactNativeCourse/AppDelegate.mm; sourceTree = "<group>"; };
@@ -37,13 +51,23 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = reactNativeCourse/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = reactNativeCourse/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-reactNativeCourse-reactNativeCourseTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-reactNativeCourse-reactNativeCourseTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A8C0E4CEC744CFDAF54CC0D /* Lato-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Black.ttf"; path = "../src/assets/fonts/Lato-Black.ttf"; sourceTree = "<group>"; };
+		2DA2C4C1A87D496596AECF08 /* Lato-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Italic.ttf"; path = "../src/assets/fonts/Lato-Italic.ttf"; sourceTree = "<group>"; };
+		3548101198BD4C6994EA8575 /* Lato-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Light.ttf"; path = "../src/assets/fonts/Lato-Light.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-reactNativeCourse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reactNativeCourse.debug.xcconfig"; path = "Target Support Files/Pods-reactNativeCourse/Pods-reactNativeCourse.debug.xcconfig"; sourceTree = "<group>"; };
+		55F1DFA329E4EE840034A9A9 /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = reactNativeCourse/BootSplash.storyboard; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-reactNativeCourse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reactNativeCourse.release.xcconfig"; path = "Target Support Files/Pods-reactNativeCourse/Pods-reactNativeCourse.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-reactNativeCourse-reactNativeCourseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reactNativeCourse-reactNativeCourseTests.debug.xcconfig"; path = "Target Support Files/Pods-reactNativeCourse-reactNativeCourseTests/Pods-reactNativeCourse-reactNativeCourseTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-reactNativeCourse.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-reactNativeCourse.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = reactNativeCourse/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		842210825F854EF590CDC193 /* Lato-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-BoldItalic.ttf"; path = "../src/assets/fonts/Lato-BoldItalic.ttf"; sourceTree = "<group>"; };
+		860A19725C144188AF696261 /* Lato-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Regular.ttf"; path = "../src/assets/fonts/Lato-Regular.ttf"; sourceTree = "<group>"; };
+		89A711D2F2E14DFCA3CE5EEF /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-BlackItalic.ttf"; path = "../src/assets/fonts/Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-reactNativeCourse-reactNativeCourseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reactNativeCourse-reactNativeCourseTests.release.xcconfig"; path = "Target Support Files/Pods-reactNativeCourse-reactNativeCourseTests/Pods-reactNativeCourse-reactNativeCourseTests.release.xcconfig"; sourceTree = "<group>"; };
+		C2FBCBB4B5A44BF994288B3E /* OFL.txt */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = OFL.txt; path = ../src/assets/fonts/OFL.txt; sourceTree = "<group>"; };
+		D0C10F88D4964D2D91A00D2C /* Lato-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-LightItalic.ttf"; path = "../src/assets/fonts/Lato-LightItalic.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F0692C5441AD46B991426AA0 /* Lato-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Bold.ttf"; path = "../src/assets/fonts/Lato-Bold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +112,7 @@
 			children = (
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
+				55F1DFA329E4EE840034A9A9 /* BootSplash.storyboard */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
@@ -106,6 +131,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3AF4D248FD9E4077A465FB53 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2A8C0E4CEC744CFDAF54CC0D /* Lato-Black.ttf */,
+				89A711D2F2E14DFCA3CE5EEF /* Lato-BlackItalic.ttf */,
+				F0692C5441AD46B991426AA0 /* Lato-Bold.ttf */,
+				842210825F854EF590CDC193 /* Lato-BoldItalic.ttf */,
+				2DA2C4C1A87D496596AECF08 /* Lato-Italic.ttf */,
+				3548101198BD4C6994EA8575 /* Lato-Light.ttf */,
+				D0C10F88D4964D2D91A00D2C /* Lato-LightItalic.ttf */,
+				860A19725C144188AF696261 /* Lato-Regular.ttf */,
+				1397A7900E174F22B07CC4E7 /* Lato-Thin.ttf */,
+				0E23AB2C4629423A82BB36F0 /* Lato-ThinItalic.ttf */,
+				C2FBCBB4B5A44BF994288B3E /* OFL.txt */,
+			);
+			name = Resources;
+			path = "";
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +166,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				3AF4D248FD9E4077A465FB53 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -242,8 +287,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55F1DFA429E4EE840034A9A9 /* BootSplash.storyboard in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				4E4B1F2C31CC4D72A3D824F6 /* Lato-Black.ttf in Resources */,
+				9424B7EF3AD1411CADD00C0F /* Lato-BlackItalic.ttf in Resources */,
+				27400812B0D742E6AD29279F /* Lato-Bold.ttf in Resources */,
+				B378D951A02C452996BB2037 /* Lato-BoldItalic.ttf in Resources */,
+				0285AD9CE46545CDA02B9335 /* Lato-Italic.ttf in Resources */,
+				A8EB12CA65914018BAD430EC /* Lato-Light.ttf in Resources */,
+				F4F45EF527594CBF8D9EF57D /* Lato-LightItalic.ttf in Resources */,
+				0353DFE47A024BC1BF78D396 /* Lato-Regular.ttf in Resources */,
+				CA297262E2C248EB83F2F728 /* Lato-Thin.ttf in Resources */,
+				A15DBD8C927742969FEDE3A7 /* Lato-ThinItalic.ttf in Resources */,
+				3219C8F888D64300838CADEF /* OFL.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

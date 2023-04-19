@@ -1,7 +1,25 @@
 import React from 'react';
-import {Alert, Platform, Text, TouchableHighlight, View} from 'react-native';
+import {Alert, Platform} from 'react-native';
+import {useTheme} from 'styled-components/native';
+import {images} from '../../constants/images';
 import {Task} from '../../types';
-import styles from './styles';
+import {
+  CardComponent,
+  CardContainer,
+  CardDescription,
+  CardImage,
+  CardLayout,
+  CardStatus,
+  CardTitle,
+  ImageContainer,
+  TextContainer,
+  CardHeader,
+  ActionsContainer,
+} from './styles';
+import EditSvg from '../../assets/icons/edit';
+import TrashSvg from '../../assets/icons/trash';
+import SquareSvg from '../../assets/icons/square';
+import CheckSquareSvg from '../../assets/icons/checkSquare';
 
 interface Props {
   task: Task;
@@ -11,6 +29,7 @@ interface Props {
 
 function Card({task, handlePress, handleDelete}: Props) {
   const isIOS = Platform.OS === 'ios';
+  const theme = useTheme();
 
   const handleDeleteCard = () => {
     Alert.alert('Delete task?', 'Are you sure you want to delete this task?', [
@@ -18,43 +37,56 @@ function Card({task, handlePress, handleDelete}: Props) {
       {text: 'Yes', onPress: () => handleDelete(task.id)},
     ]);
   };
+  const handleEditCard = () => {
+    Alert.alert('Coming soon!');
+  };
+
+  const taskImage =
+    task.image && task.image in images.tasks
+      ? (task.image as keyof typeof images.tasks)
+      : undefined;
+
+  const iconsColor = isIOS ? theme.colors.light : theme.colors.lightGray;
+
   return (
-    <View style={styles.cardContainer}>
-      <TouchableHighlight
+    <CardContainer>
+      <CardComponent
         activeOpacity={0.6}
-        underlayColor={isIOS ? '#262626' : '#EEEEEE'}
-        onPress={() => handlePress(task.id)}
-        onLongPress={() => handleDeleteCard()}
-        style={styles.card}>
-        <View>
-          <Text
-            style={{
-              ...styles.cardTitle,
-              ...(task.status && styles.crossedText),
-            }}
-            numberOfLines={1}>
-            {task.title}
-          </Text>
-          <Text
-            style={{
-              ...styles.cardDescription,
-              ...(task.status && styles.crossedText),
-            }}
-            numberOfLines={2}>
-            {task.description}
-          </Text>
-          <Text
-            style={{
-              ...styles.cardStatus,
-              ...(task.status
-                ? styles.cardStatusDone
-                : styles.cardStatusPending),
-            }}>
-            {task.status ? 'Done' : 'Pending'}
-          </Text>
-        </View>
-      </TouchableHighlight>
-    </View>
+        underlayColor={isIOS ? theme.colors.lightGray : theme.colors.white}
+        onPress={() => handlePress(task.id)}>
+        <CardLayout>
+          {taskImage && (
+            <ImageContainer>
+              <CardImage alt={task.title} source={images.tasks[taskImage]} />
+            </ImageContainer>
+          )}
+          <TextContainer>
+            <CardHeader>
+              <CardTitle status={task.status} numberOfLines={1}>
+                {task.title}
+              </CardTitle>
+              <ActionsContainer>
+                <EditSvg color={iconsColor} onPress={() => handleEditCard()} />
+                <TrashSvg
+                  color={theme.colors.red}
+                  onPress={() => handleDeleteCard()}
+                />
+              </ActionsContainer>
+            </CardHeader>
+            <CardDescription status={task.status} numberOfLines={2}>
+              {task.description}
+            </CardDescription>
+            <CardStatus status={task.status}>
+              {task.status ? (
+                <CheckSquareSvg color={iconsColor} />
+              ) : (
+                <SquareSvg color={iconsColor} />
+              )}
+            </CardStatus>
+          </TextContainer>
+        </CardLayout>
+      </CardComponent>
+    </CardContainer>
   );
 }
 
